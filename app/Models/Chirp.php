@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Chirp extends Model
 {
     use HasFactory;
+
+    /**
+     * on peut au model chirp d'accepter les enregistrement
+     */
+    protected $fillable = [
+        'message',
+    ];
 }
