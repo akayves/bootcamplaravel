@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
  * ajouter un middleware
  */
 Route::resource('chirps', ChirpController::class)
-    ->only(['index', 'store']) //ici, la methode only active les routes index et store uniquement
+    ->only(['index', 'store', 'edit', 'update']) //ici, la methode only active les routes index et store uniquement
     ->middleware('auth'); //le middleware permet à l'utilisateur d'accéder à la page index et store si et seulement si il est connecté
 
 require __DIR__.'/auth.php';

@@ -59,17 +59,31 @@ class ChirpController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Chirp $chirp)
+    public function edit(Chirp $chirp): View
     {
-        //
+        //on verifie si il est autorisé à modifier, puis on lui renvoie la page de modification
+        $this->authorize('update', $chirp);
+
+        return view ('chirps.edit', [
+            'chirp' => $chirp,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Chirp $chirp)
+    public function update(Request $request, Chirp $chirp) : RedirectResponse
     {
-        //
+        //verifie si il est autorizé à modifier
+         $this->authorize('update', $chirp);
+
+         $validaded = $request->validate([
+            'message' => 'required|string|max:255',
+         ]);
+
+         $chirp->update($validaded);
+
+         return redirect(route('chirps.index'));
     }
 
     /**
